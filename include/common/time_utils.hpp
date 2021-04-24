@@ -1,38 +1,45 @@
 #pragma once
+
 #include <chrono>
 #include <queue>
 
-class Timer {
-public:
-    Timer();
+namespace LiteEngine::Common {
 
-    void Step();
+    class Timer {
+    public:
+        Timer();
 
-    double GetElapsedSinceStep();
+        void Step();
 
-    double GetElapsedSinceStart();
+        double GetElapsedSinceStep();
 
-private:
-    std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> prev_time;
-    std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> start_time;
-};
+        double GetElapsedSinceStart();
 
-class FPSMeter {
-public:
-    FPSMeter() = default;
+    private:
+        std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> prev_time;
+        std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> start_time;
+    };
 
-    void StartFrame();
+    class FpsMeter {
+    public:
+        FpsMeter() = default;
 
-    void EndFrame();
+        void StartFrame();
 
-    double GetFPS() const;
+        void EndFrame();
 
-    double GetMs() const;
+        double GetAverageFps() const;
 
-private:
-    std::queue<double> times;
+        double GetAverageMsPerFrame() const;
 
-    const int MAX_FRAMES_COUNT = 120;
+    private:
+        const int MAX_FRAMES_COUNT = 120;
 
-    Timer timer;
-};
+        std::queue<double> times;
+
+        Timer timer;
+
+        bool frame_started = false;
+    };
+
+} // namespace LiteEngine::Common

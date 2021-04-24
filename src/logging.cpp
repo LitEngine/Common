@@ -1,6 +1,8 @@
 #include <common/logging.hpp>
 #include <algorithm>
 
+using namespace LiteEngine::Common;
+
 std::vector<Log> Logger::GetLastLogs(int number_of_logs) {
     std::vector<Log> res;
     for(int i = 0; i < number_of_logs && i < logs_list.size(); i++) {
@@ -15,7 +17,7 @@ Logger &Logger::Instance() {
     return instance;
 }
 
-std::string Logger::PrefixByType(LogType type) const {
+std::string Logger::PrefixByType(LogType type) {
     switch(type) {
         case LogType::LOG_INFO:
             return "[INFO]";

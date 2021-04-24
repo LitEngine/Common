@@ -8,6 +8,8 @@
 #include <SDL_log.h>
 #endif
 
+namespace LiteEngine::Common {
+
 enum class LogType {
     LOG_INFO = 0,
     LOG_WARNING = 1,
@@ -22,7 +24,7 @@ struct Log {
 class Logger {
 public:
     template<class... Args>
-    void AddLog(LogType type, std::string message, Args... args) {
+    void AddLog(LogType type, const std::string& message, Args... args) {
         char buffer[1024];
         snprintf(buffer, 1024, message.c_str(), args...);
         std::string formatted = std::string(buffer);
@@ -78,10 +80,13 @@ public:
     std::vector<Log> GetLastLogs(int number_of_logs = 16);
 
     static Logger & Instance();
+
 private:
-    std::string PrefixByType(LogType type) const;
+    static std::string PrefixByType(LogType type) ;
 
     Logger() = default;
 
     std::vector<Log> logs_list;
 };
+
+} // namespace LiteEngine::Common
