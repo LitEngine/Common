@@ -1,7 +1,7 @@
-#include <common/logging.hpp>
+#include <lit/common/logging.hpp>
 #include <algorithm>
 
-using namespace LiteEngine::Common;
+using namespace lit::common;
 
 std::vector<Log> Logger::GetLastLogs(int number_of_logs) {
     std::vector<Log> res;

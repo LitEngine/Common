@@ -1,19 +1,14 @@
-#include <common/time_utils.hpp>
-#include <common/logging.hpp>
-#include <common/assert.hpp>
+#include <lit/common/time_utils.hpp>
+#include <lit/common/logging.hpp>
+#include <lit/common/assert.hpp>
+#include <bit>
 
-using namespace LiteEngine::Common;
+using namespace lit::common;
 
 void ExampleTime() {
     Timer timer;
 
-    timer.Step();
-    // perform operation 1
-    double op1_time = timer.GetElapsedSinceStep();
-
-    timer.Step();
-    // perform operation 2
-    double op2_time = timer.GetElapsedSinceStep();
+    double t = timer.ElapsedTime();
 
     FpsMeter fps;
 
@@ -34,11 +29,11 @@ void ExampleLogging() {
 }
 
 void ExampleAssert() {
-    ENGINE_ASSERT(2 + 2 == 4, "2 + 2 should be 4")
+    LIT_ASSERT(2 + 2 == 4, "2 + 2 should be 4")
     int x = 5, y = 7, z = x + y;
-    ENSURE_THAT(x + y == z)
-    ENSURE_THAT_EQ(x, 5)
-    ENSURE_THAT_BETWEEN(x, 4, 7)
+    LIT_ENSURE(x + y == z)
+    LIT_ENSURE_EQ(x, 5)
+    LIT_ENSURE_BETWEEN(x, 4, 7)
 }
 
 int main() {

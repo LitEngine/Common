@@ -3,20 +3,15 @@
 #include <chrono>
 #include <queue>
 
-namespace LiteEngine::Common {
+namespace lit::common {
 
     class Timer {
     public:
         Timer();
 
-        void Step();
-
-        double GetElapsedSinceStep();
-
-        double GetElapsedSinceStart();
+        double ElapsedTime();
 
     private:
-        std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> prev_time;
         std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> start_time;
     };
 
@@ -42,4 +37,4 @@ namespace LiteEngine::Common {
         bool frame_started = false;
     };
 
-} // namespace LiteEngine::Common
+}
